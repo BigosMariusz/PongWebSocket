@@ -1,0 +1,9 @@
+C:\Users\Mariusz\source\repos\LastTest\LastTest\bin\Debug\LastTest.exe.config
+C:\Users\Mariusz\source\repos\LastTest\LastTest\bin\Debug\LastTest.exe
+C:\Users\Mariusz\source\repos\LastTest\LastTest\bin\Debug\LastTest.pdb
+C:\Users\Mariusz\source\repos\LastTest\LastTest\bin\Debug\websocket-sharp.dll
+C:\Users\Mariusz\source\repos\LastTest\LastTest\bin\Debug\websocket-sharp.xml
+C:\Users\Mariusz\source\repos\LastTest\LastTest\obj\Debug\LastTest.csprojAssemblyReference.cache
+C:\Users\Mariusz\source\repos\LastTest\LastTest\obj\Debug\LastTest.csproj.CopyComplete
+C:\Users\Mariusz\source\repos\LastTest\LastTest\obj\Debug\LastTest.exe
+C:\Users\Mariusz\source\repos\LastTest\LastTest\obj\Debug\LastTest.pdb
