@@ -20,6 +20,11 @@ namespace PongWebsocket.GameLogic
         public static string Score { get; set; }
         public static Dictionary<int, WebSocket> Clients { get; set; } = new Dictionary<int, WebSocket>();
 
+        public static void InitialSavePosition(double padX, int playerId)
+        {
+            _firstPlayer = new KeyValuePair<int, double>(playerId, padX);
+        }
+
         public static void SavePosition(double padX, int playerId)
         {
             if (_firstPlayer.Key == playerId)

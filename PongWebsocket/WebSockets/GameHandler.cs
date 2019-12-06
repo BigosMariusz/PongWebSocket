@@ -23,7 +23,7 @@ namespace PongWebsocket.WebSockets
             if (Game.Clients.Count == 0)
             {
                 Game.Clients.Add(dataReceived.Id, Context.WebSocket);
-                Game.SavePosition(dataReceived.PadX, dataReceived.Id);
+                Game.InitialSavePosition(dataReceived.PadX, dataReceived.Id);
             }
             else if (Game.Clients.ContainsKey(dataReceived.Id))
             {
@@ -74,6 +74,8 @@ namespace PongWebsocket.WebSockets
         }
         protected override void OnClose(CloseEventArgs e)
         {
+            var key = Game.Clients.Where(x => x.Value == Context.WebSocket).FirstOrDefault().Key;
+            Game.Clients.Remove(key);
             Console.WriteLine("Close");
         }
 
