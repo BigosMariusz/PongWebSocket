@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameLogic\Game.cs" />
-    <Compile Include="GameLogic\InitialValues.cs" />
     <Compile Include="GameLogic\Models\GameState.cs" />
     <Compile Include="WebSockets\GameHandler.cs" />
     <Compile Include="GameLogic\Ball.cs" />

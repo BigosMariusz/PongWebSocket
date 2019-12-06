@@ -14,29 +14,27 @@ namespace PongWebsocket.WebSockets
 {
     public class GameHandler : WebSocketBehavior
     {
-        private double _communicationInterval = 33;
-        private Dictionary<int, WebSocket> _clients = new Dictionary<int, WebSocket>();
-        private Game _game = new Game();
+        private double _communicationInterval = 100;
 
         protected override void OnMessage(MessageEventArgs e)
         {
             var dataReceived = JsonConvert.DeserializeObject<DataReceived>(e.Data);
 
-            if (_clients.Count == 0)
+            if (Game.Clients.Count == 0)
             {
-                _clients.Add(dataReceived.Id, Context.WebSocket);
-                _game.SavePosition(dataReceived.PadX, dataReceived.Id);
+                Game.Clients.Add(dataReceived.Id, Context.WebSocket);
+                Game.SavePosition(dataReceived.PadX, dataReceived.Id);
             }
-            else if (_clients.ContainsKey(dataReceived.Id))
+            else if (Game.Clients.ContainsKey(dataReceived.Id))
             {
-                _game.SavePosition(dataReceived.PadX, dataReceived.Id);
+                Game.SavePosition(dataReceived.PadX, dataReceived.Id);
             }
             else
             {
-                _clients.Add(dataReceived.Id, Context.WebSocket);
-                _game.SavePosition(dataReceived.PadX, dataReceived.Id);
+                Game.Clients.Add(dataReceived.Id, Context.WebSocket);
+                Game.SavePosition(dataReceived.PadX, dataReceived.Id);
 
-                _game.InitializeData();
+                Game.InitializeData();
                 StartSendingGameData();
             }
         }
@@ -52,9 +50,9 @@ namespace PongWebsocket.WebSockets
 
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
-            var gameState = _game.GetActaulState();
+            var gameState = Game.GetActaulState();
 
-            foreach (var client in _clients)
+            foreach (var client in Game.Clients)
             {
                 var success = gameState.PlayersXPositions.TryGetValue(client.Key, out double opponent);
                 if (!success)

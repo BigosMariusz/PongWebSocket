@@ -5,20 +5,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebSocketSharp;
 
 namespace PongWebsocket.GameLogic
 {
-    public class Game
+    public static class Game
     {
-        private KeyValuePair<int, double> _firstPlayer = new KeyValuePair<int, double>();
-        private KeyValuePair<int, double> _secondPlayer = new KeyValuePair<int, double>();
+        private static KeyValuePair<int, double> _firstPlayer = new KeyValuePair<int, double>();
+        private static KeyValuePair<int, double> _secondPlayer = new KeyValuePair<int, double>();
 
-        public Ball Ball { get; set; }
-        public Pad FirstPad { get; set; }
-        public Pad SecondPad { get; set; }
+        public static Ball Ball { get; set; }
+        public static Pad FirstPad { get; set; }
+        public static Pad SecondPad { get; set; }
         public static string Score { get; set; }
+        public static Dictionary<int, WebSocket> Clients { get; set; } = new Dictionary<int, WebSocket>();
 
-        public void SavePosition(double padX, int playerId)
+        public static void SavePosition(double padX, int playerId)
         {
             if (_firstPlayer.Key == playerId)
             {
@@ -30,7 +32,7 @@ namespace PongWebsocket.GameLogic
             }
         }
 
-        public void InitializeData()
+        public static void InitializeData()
         {
             Ball = new Ball(0.5, 0.5, 0.1, (32 / 30) * Math.PI);
             FirstPad = new Pad(_firstPlayer.Value, 0.9, 0.4, 0.03);
@@ -38,7 +40,7 @@ namespace PongWebsocket.GameLogic
             Score = "0:0";
         }
 
-        public GameState GetActaulState()
+        public static GameState GetActaulState()
         {
             double time = 1000;
 
