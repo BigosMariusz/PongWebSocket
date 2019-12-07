@@ -41,39 +41,12 @@ namespace PongWebsocket.WebSockets
 
         private void StartSendingGameData()
         {
-            Timer t = new Timer();
-            t.Interval = _communicationInterval;
-            t.AutoReset = true;
-            t.Elapsed += new ElapsedEventHandler(TimerElapsed);
-            t.Start();
+            TimerHelper.StartTimer(_communicationInterval);
         }
 
-        private void TimerElapsed(object sender, ElapsedEventArgs e)
-        {
-            var gameState = Game.GetActaulState();
-
-            foreach (var client in Game.Clients)
-            {
-                var success = gameState.PlayersXPositions.TryGetValue(client.Key, out double opponent);
-                if (!success)
-                    return;
-
-                var dataToSend = new DataToSend()
-                {
-                    Opponent = opponent,
-                    BallX = gameState.BallX,
-                    BallY = gameState.BallY,
-                    Speed = gameState.Speed,
-                    Degree = gameState.Degree,
-                    Score = gameState.Score
-                };
-
-                var json = JsonConvert.SerializeObject(dataToSend);
-                client.Value.Send(json);
-            }
-        }
         protected override void OnClose(CloseEventArgs e)
         {
+            TimerHelper.StopTimer();
             var key = Game.Clients.Where(x => x.Value == Context.WebSocket).FirstOrDefault().Key;
             Game.Clients.Remove(key);
             Console.WriteLine("Close");

@@ -58,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebSockets\Models\DataReceived.cs" />
     <Compile Include="WebSockets\Models\DataToSend.cs" />
+    <Compile Include="WebSockets\TimerHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

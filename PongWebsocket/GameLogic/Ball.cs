@@ -51,8 +51,8 @@ namespace PongWebsocket.GameLogic
         {
             var degreeSin = Math.Sin(_degree);
             var degreeCos = Math.Cos(_degree);
-            var sx = degreeSin * _speed / timeMillis;
-            var sy = degreeCos * _speed / timeMillis;
+            var sx = degreeSin * _speed * (timeMillis / 1000);
+            var sy = degreeCos * _speed * (timeMillis / 1000);
 
             return Translate(sx, sy)
                 .TryBouncePad(firstPad)
